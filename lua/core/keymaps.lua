@@ -44,3 +44,18 @@ keymap.set("n", "<leader>fs", "<cmd>Telescope live_grep<cr>") -- find string in 
 keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>") -- find string under cursor in current working directory
 keymap.set("n", "<leader>fb", "<cmd>Telescope buffers<cr>") -- list open buffers in current neovim instance
 keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available help tags
+
+-- toggleterm
+
+local opts = {buffer = 0}
+
+-- move out of terminal while still keeping it open
+keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+-- toggle terminal keymap
+keymap.set('n', '<leader>te', '<cmd>ToggleTerm<cr>')
+keymap.set('t', '<leader>te', '<cmd>ToggleTerm<cr>')
+

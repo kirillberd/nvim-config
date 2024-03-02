@@ -83,6 +83,9 @@ return packer.startup(function(use)
     -- vcode-like icons for autocompletion
     use("onsails/lspkind.nvim") 
     -- for latex
+    use("lervag/vimtex")
+    -- toggle terminal in vim
+    use("akinsho/toggleterm.nvim")
   if packer_bootstrap then
     require("packer").sync()
   end
