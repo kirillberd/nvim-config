@@ -47,7 +47,6 @@ keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>") -- list available 
 
 -- toggleterm
 
-local opts = {buffer = 0}
 
 -- move out of terminal while still keeping it open
 keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
@@ -57,5 +56,3 @@ keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
 keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
 -- toggle terminal keymap
 keymap.set('n', '<leader>te', '<cmd>ToggleTerm<cr>')
-keymap.set('t', '<leader>te', '<cmd>ToggleTerm<cr>')
-

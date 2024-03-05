@@ -5,4 +5,8 @@ if not toggleterm_status then
 end
 
 
-toggleterm.setup()
+toggleterm.setup(
+{
+  shading_factor = 30,
+}
+)

@@ -33,6 +33,7 @@ return packer.startup(function(use)
     -- lua functions that many plugins use
     use("nvim-lua/plenary.nvim")
   --colorschemes
+    use("folke/tokyonight.nvim")
     use("rebelot/kanagawa.nvim")
     use("ellisonleao/gruvbox.nvim")
     use("neanias/everforest-nvim")
@@ -86,6 +87,17 @@ return packer.startup(function(use)
     use("lervag/vimtex")
     -- toggle terminal in vim
     use("akinsho/toggleterm.nvim")
+    -- auto brackets and quotes close
+    use("m4xshen/autoclose.nvim")
+    -- cheatsheet
+    use {
+  'sudormrfbin/cheatsheet.nvim',
+  requires = {
+    {'nvim-telescope/telescope.nvim'},
+    {'nvim-lua/popup.nvim'},
+    {'nvim-lua/plenary.nvim'},
+  }
+    }
   if packer_bootstrap then
     require("packer").sync()
   end
