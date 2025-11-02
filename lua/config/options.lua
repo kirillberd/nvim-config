@@ -7,7 +7,9 @@ local opts = {
 	number = true,
 	relativenumber = true,
     ignorecase = true,
-    smartcase = true
+    smartcase = true,
+    cursorline = true,
+    swapfile = true
 }
 
 -- Set options from table
