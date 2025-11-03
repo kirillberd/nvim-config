@@ -1,7 +1,7 @@
 -- Init lazy
 require("config.lazy")
 
--- Init keymasps
+-- Init keymaps
 require("config.keymaps")
 
 -- Init options
