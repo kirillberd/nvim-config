@@ -22,5 +22,5 @@ local colorscheme = require("helpers.colorscheme")
 vim.cmd.colorscheme(colorscheme)
 
 vim.schedule(function()
-  vim.o.clipboard = 'unnamedplus'
+    vim.o.clipboard = 'unnamedplus'
 end)
