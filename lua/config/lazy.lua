@@ -19,7 +19,8 @@ require("helpers.keys").set_leader(" ")
 
 require("lazy").setup({
   spec = {
-    { import = "plugins" },
+    { import = "plugins"},
+    { import = "plugins.lsp"}
   },
     checker = { enabled = true, notify = false},
     change_detection = {notify = false},

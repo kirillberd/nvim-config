@@ -13,6 +13,7 @@ return {
     "rafamadriz/friendly-snippets", -- useful snippets
     "onsails/lspkind.nvim", -- vs-code like pictograms
   },
+    
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
@@ -38,9 +39,25 @@ return {
             fallback()
         end
         end
+    local j_next_item = function(fallback)
+        if cmp.visible() then
+            cmp.select_next_item({ behavior = cmp.SelectBehavior.Insert })
+        else
+            fallback()
+        end 
+    end
+
+    local k_prev_item = function(fallback)
+        if cmp.visible() then
+            cmp.select_prev_item({ behavior = cmp.SelectBehavior.Insert })
+        else
+            fallback()
+        end 
+    end
+
+
    -- loads vscode style snippets from installed plugins (e.g. friendly-snippets)
     require("luasnip.loaders.from_vscode").lazy_load()
-    
     cmp.setup({
       completion = {
         completeopt = "menu,menuone,preview,noselect",
@@ -52,7 +69,9 @@ return {
       },
       mapping = cmp.mapping.preset.insert({
         ["<Esc>"] = cmp.mapping(esc_abort, {"i", "s"}),
-        ["<Tab>"] = cmp.mapping(tab_completion, {"i","s",}),
+        ["<Tab>"] = cmp.mapping(tab_completion, {"i","s"}),
+        ["j"] = cmp.mapping(j_next_item, {"i", "s"}),
+        ["k"] = cmp.mapping(k_prev_item, {"i", "s"}),
       }),
       -- sources for autocompletion
       sources = cmp.config.sources({
