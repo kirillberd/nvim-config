@@ -13,12 +13,11 @@ return {
     "rafamadriz/friendly-snippets", -- useful snippets
     "onsails/lspkind.nvim", -- vs-code like pictograms
   },
-    
+   
   config = function()
     local cmp = require("cmp")
     local luasnip = require("luasnip")
-
-    local lspkind = require("lspkind")    
+    local lspkind = require("lspkind")
     -- enable autocompletion on tab
     local tab_completion = function(fallback)
       if cmp.visible() then
@@ -75,11 +74,11 @@ return {
       }),
       -- sources for autocompletion
       sources = cmp.config.sources({
+        { name = "nvim_lsp"},
         { name = "luasnip" }, -- snippets
         { name = "buffer" }, -- text within current buffer
         { name = "path" }, -- file system paths
       }),
-
       -- configure lspkind for vs-code like pictograms in completion menu
       formatting = {
         format = lspkind.cmp_format({
