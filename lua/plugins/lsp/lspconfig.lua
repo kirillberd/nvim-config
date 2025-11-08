@@ -85,5 +85,19 @@ return {
             },
           },
         })
+        
+        lspconfig("basedpyright", {
+            capabilities = capabilities,
+            settings = {
+                  basedpyright = {
+                  analysis = {
+                  autoSearchPaths = true,
+                    diagnosticMode = "openFilesOnly",
+                  useLibraryCodeForTypes = true
+    }
+  }
+            }
+        })
       end,
 }
+

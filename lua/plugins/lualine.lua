@@ -64,6 +64,7 @@ return {
           { "encoding" },
           { "fileformat" },
           { "filetype" },
+            {"venv-selector"}
         },
       },
     })
