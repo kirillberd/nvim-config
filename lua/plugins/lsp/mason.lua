@@ -3,6 +3,7 @@ return {
 	dependencies = {
 		"mason-org/mason-lspconfig.nvim",
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		"mfussenegger/nvim-jdtls",
 	},
 	config = function()
 		local mason = require("mason")
@@ -24,6 +25,12 @@ return {
 			ensure_installed = {
 				"lua_ls",
 				"basedpyright",
+				"jdtls",
+			},
+			automatic_enable = {
+				exclude = {
+					"jdtls",
+				},
 			},
 		})
 

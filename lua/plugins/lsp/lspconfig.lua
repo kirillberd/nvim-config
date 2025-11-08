@@ -63,6 +63,13 @@ return {
 				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 			end,
 		})
+		vim.api.nvim_create_autocmd("FileType", {
+			pattern = "java",
+			callback = function(args)
+				require("jdtls.jdtls_setup").setup()
+				print("Set up jdtls")
+			end,
+		})
 
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 
