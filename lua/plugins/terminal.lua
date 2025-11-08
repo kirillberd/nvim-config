@@ -1,14 +1,11 @@
-return {"akinsho/toggleterm.nvim",
-    config = function()
-        require("toggleterm").setup({
+return {
+	"akinsho/toggleterm.nvim",
+	config = function()
+		require("toggleterm").setup({
 
-            size = 20,
-
-
-        })
-        local opts = {buffer = 0},
-        vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
-        vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm<CR>")
-
-    end
-} 
+			size = 20,
+		})
+		vim.keymap.set("t", "<esc>", [[<C-\><C-n>]])
+		vim.keymap.set("n", "<leader>tt", "<cmd>ToggleTerm<CR>")
+	end,
+}
