@@ -26,6 +26,7 @@ return {
 				"lua_ls",
 				"basedpyright",
 				"jdtls",
+				"gradle_ls",
 			},
 			automatic_enable = {
 				exclude = {
