@@ -4,7 +4,6 @@ local function get_if_available(name, opts)
 		colorscheme.setup(opts)
 		return name
 	end
-
 	local vim_ok, _ = pcall(vim.cmd.colorscheme, name)
 	if vim_ok then
 		return name
@@ -12,7 +11,6 @@ local function get_if_available(name, opts)
 
 	return "default"
 end
-
 
 local colorscheme = get_if_available("tokyonight")
 
