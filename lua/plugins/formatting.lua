@@ -5,6 +5,11 @@ return {
 		local conform = require("conform")
 
 		conform.setup({
+			formatters = {
+				["google-java-format"] = {
+					prepend_args = { "--aosp" },
+				},
+			},
 			formatters_by_ft = {
 				svelte = { "prettier" },
 				css = { "prettier" },
@@ -14,6 +19,7 @@ return {
 				markdown = { "prettier" },
 				lua = { "stylua" },
 				python = { "black" },
+				java = { "google-java-format" },
 			},
 			format_on_save = {
 				lsp_fallback = true,

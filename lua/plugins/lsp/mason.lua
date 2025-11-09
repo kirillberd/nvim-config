@@ -40,6 +40,9 @@ return {
 				"prettier",
 				"stylua",
 				"black",
+				"pylint",
+				"checkstyle",
+				"google-java-format",
 			},
 		})
 	end,
