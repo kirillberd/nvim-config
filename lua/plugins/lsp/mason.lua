@@ -27,6 +27,7 @@ return {
 				"basedpyright",
 				"jdtls",
 				"gradle_ls",
+				"pbls",
 			},
 			automatic_enable = {
 				exclude = {
