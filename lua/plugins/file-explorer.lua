@@ -4,6 +4,14 @@ return {
 	config = function()
 		local nvimtree = require("nvim-tree")
 
+		local function my_on_attach(bufnr)
+			local api = require("nvim-tree.api")
+
+			api.config.mappings.default_on_attach(bufnr)
+			vim.keymap.set("n", "<leader>ev", api.node.open.vertical)
+			vim.keymap.set("n", "<leader>et", api.node.open.tab)
+		end
+
 		vim.g.loaded_netrw = 1
 		vim.g.loaded_netrwPlugin = 1
 
@@ -41,6 +49,7 @@ return {
 			git = {
 				ignore = true,
 			},
+			on_attach = my_on_attach,
 		})
 		local keymap = vim.keymap
 

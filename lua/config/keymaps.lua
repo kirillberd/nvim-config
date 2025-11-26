@@ -18,6 +18,9 @@ map("n", "<leader>sj", "<C-w>j", "Move to lower window")
 map("n", "<leader>sk", "<C-w>k", "Move to upper window")
 map("n", "<leader>sl", "<C-w>l", "Move to right window")
 
+map("n", "<leader>mh", "<C-w>H", "Move split left")
+map("n", "<leader>ml", "<C-w>L", "Move split right")
+
 map("n", "<leader>to", "<cmd>tabnew<CR>", "Open new tab")
 map("n", "<leader>tx", "<cmd>tabclose<CR>", "Close current tab")
 map("n", "<leader>tn", "<cmd>tabn<CR>", "Go to next tab")
