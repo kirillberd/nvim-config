@@ -10,6 +10,7 @@ return {
 			api.config.mappings.default_on_attach(bufnr)
 			vim.keymap.set("n", "<leader>ev", api.node.open.vertical)
 			vim.keymap.set("n", "<leader>et", api.node.open.tab)
+			vim.keymap.set("n", "<leader>cd", api.tree.change_root_to_node)
 		end
 
 		vim.g.loaded_netrw = 1
@@ -47,9 +48,12 @@ return {
 				custom = { ".DS_Store" },
 			},
 			git = {
-				ignore = true,
+				ignore = false,
 			},
 			on_attach = my_on_attach,
+			actions = {
+				use_system_clipboard = true,
+			},
 		})
 		local keymap = vim.keymap
 
