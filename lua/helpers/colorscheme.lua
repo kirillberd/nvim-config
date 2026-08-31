@@ -12,6 +12,6 @@ local function get_if_available(name, opts)
 	return "default"
 end
 
-local colorscheme = get_if_available("tokyonight")
+local colorscheme = get_if_available("kanagawa-dragon")
 
 return colorscheme
