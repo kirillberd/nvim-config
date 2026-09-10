@@ -8,9 +8,11 @@ return {
 			local api = require("nvim-tree.api")
 
 			api.config.mappings.default_on_attach(bufnr)
-			vim.keymap.set("n", "<leader>ev", api.node.open.vertical)
-			vim.keymap.set("n", "<leader>et", api.node.open.tab)
-			vim.keymap.set("n", "<leader>cd", api.tree.change_root_to_node)
+			-- buffer-local so these don't leak into regular buffers
+			local opts = { buffer = bufnr, silent = true, nowait = true }
+			vim.keymap.set("n", "<leader>ev", api.node.open.vertical, opts)
+			vim.keymap.set("n", "<leader>et", api.node.open.tab, opts)
+			vim.keymap.set("n", "<leader>cd", api.tree.change_root_to_node, opts)
 		end
 
 		vim.g.loaded_netrw = 1
@@ -34,15 +36,16 @@ return {
 					},
 				},
 			},
-			-- disable window_picker for
-			-- explorer to work well with
-			-- window splits
 			actions = {
+				-- disable window_picker for
+				-- explorer to work well with
+				-- window splits
 				open_file = {
 					window_picker = {
 						enable = false,
 					},
 				},
+				use_system_clipboard = true,
 			},
 			filters = {
 				custom = { ".DS_Store" },
@@ -51,9 +54,6 @@ return {
 				ignore = false,
 			},
 			on_attach = my_on_attach,
-			actions = {
-				use_system_clipboard = true,
-			},
 		})
 		local keymap = vim.keymap
 

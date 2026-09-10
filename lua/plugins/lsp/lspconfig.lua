@@ -2,9 +2,9 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
-		"hrsh7th/cmp-nvim-lsp",
+		"saghen/blink.cmp",
 		{ "antosha417/nvim-lsp-file-operations", config = true },
-		{ "folke/neodev.nvim", opts = {} },
+		{ "folke/lazydev.nvim", ft = "lua", opts = {} },
 		{
 			"rachartier/tiny-inline-diagnostic.nvim",
 			event = "VeryLazy",
@@ -13,12 +13,6 @@ return {
 		},
 	},
 	config = function()
-		-- import lspconfig plugin
-		local lspconfig = vim.lsp.config
-
-		-- import cmp-nvim-lsp plugin
-		local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 		local keymap = vim.keymap -- for conciseness
 
 		vim.api.nvim_create_autocmd("LspAttach", {
@@ -57,13 +51,22 @@ return {
 				keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts) -- show diagnostics for line
 
 				opts.desc = "Go to previous diagnostic"
-				keymap.set("n", "[d", vim.diagnostic.goto_prev, opts) -- jump to previous diagnostic in buffer
+				keymap.set("n", "[d", function()
+					vim.diagnostic.jump({ count = -1 })
+				end, opts) -- jump to previous diagnostic in buffer
 
 				opts.desc = "Go to next diagnostic"
-				keymap.set("n", "]d", vim.diagnostic.goto_next, opts) -- jump to next diagnostic in buffer
+				keymap.set("n", "]d", function()
+					vim.diagnostic.jump({ count = 1 })
+				end, opts) -- jump to next diagnostic in buffer
 
 				opts.desc = "Show documentation for what is under cursor"
 				keymap.set("n", "K", vim.lsp.buf.hover, opts) -- show documentation for what is under cursor
+
+				opts.desc = "Toggle inlay hints"
+				keymap.set("n", "<leader>ih", function()
+					vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = ev.buf }), { bufnr = ev.buf })
+				end, opts)
 
 				opts.desc = "Restart LSP"
 				keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
@@ -71,55 +74,27 @@ return {
 		})
 		vim.api.nvim_create_autocmd("FileType", {
 			pattern = "java",
-			callback = function(args)
+			callback = function()
 				require("jdtls.jdtls_setup").setup()
-				print("Set up jdtls")
 			end,
 		})
 
-		local capabilities = cmp_nvim_lsp.default_capabilities()
+		vim.lsp.config("*", {
+			capabilities = require("blink.cmp").get_lsp_capabilities(),
+		})
 
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
-		for type, icon in pairs(signs) do
-			local hl = "DiagnosticSign" .. type
-			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
-		end
-		lspconfig("lua_ls", {
-			capabilities = capabilities,
-			settings = {
-				Lua = {
-					-- make the language server recognize "vim" global
-					diagnostics = {
-						globals = { "vim" },
-					},
-					completion = {
-						callSnippet = "Replace",
-					},
+		vim.diagnostic.config({
+			severity_sort = true, -- errors win over hints when sharing a line
+			float = { border = "rounded" },
+			signs = {
+				text = {
+					[vim.diagnostic.severity.ERROR] = signs.Error,
+					[vim.diagnostic.severity.WARN] = signs.Warn,
+					[vim.diagnostic.severity.HINT] = signs.Hint,
+					[vim.diagnostic.severity.INFO] = signs.Info,
 				},
 			},
-		})
-
-		lspconfig("basedpyright", {
-			capabilities = capabilities,
-			settings = {
-				basedpyright = {
-					-- ruff handles linting and organizing imports
-					disableOrganizeImports = true,
-					analysis = {
-						autoSearchPaths = true,
-						diagnosticMode = "openFilesOnly",
-						useLibraryCodeForTypes = true,
-					},
-				},
-			},
-		})
-
-		lspconfig("ruff", {
-			capabilities = capabilities,
-			on_attach = function(client)
-				-- hover is basedpyright's job
-				client.server_capabilities.hoverProvider = false
-			end,
 		})
 	end,
 }

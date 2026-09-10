@@ -14,7 +14,7 @@ function M.setup()
 	local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 	local workspace_dir = home .. sep .. "jdtls-workspace" .. sep .. project_name
 
-	local os_name = vim.loop.os_uname().sysname
+	local os_name = vim.uv.os_uname().sysname
 	local config_dir = jdtls_pkg
 		.. sep
 		.. "config_"
@@ -61,10 +61,16 @@ function M.setup()
 
 		root_dir = root_dir,
 
+		-- nvim-jdtls bypasses vim.lsp.config("*"), so pass completion capabilities explicitly
+		capabilities = require("blink.cmp").get_lsp_capabilities(),
+
 		settings = {
 			java = {
 				configuration = {
 					updateBuildConfiguration = "automatic",
+				},
+				inlayHints = {
+					parameterNames = { enabled = "all" },
 				},
 				import = {
 					gradle = {
