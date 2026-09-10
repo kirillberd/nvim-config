@@ -11,14 +11,8 @@ return {
 				},
 			},
 			formatters_by_ft = {
-				svelte = { "prettier" },
-				css = { "prettier" },
-				html = { "prettier" },
-				json = { "prettier" },
-				yaml = { "prettier" },
-				markdown = { "prettier" },
 				lua = { "stylua" },
-				python = { "black" },
+				python = { "ruff_organize_imports", "ruff_format" },
 				java = { "google-java-format" },
 			},
 			format_on_save = {

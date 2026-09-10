@@ -25,9 +25,8 @@ return {
 			ensure_installed = {
 				"lua_ls",
 				"basedpyright",
+				"ruff",
 				"jdtls",
-				"gradle_ls",
-				"pbls",
 			},
 			automatic_enable = {
 				exclude = {
@@ -38,12 +37,8 @@ return {
 
 		mason_tool_installer.setup({
 			ensure_installed = {
-				-- linters
-				"prettier",
+				-- formatters
 				"stylua",
-				"black",
-				"pylint",
-				"checkstyle",
 				"google-java-format",
 			},
 		})

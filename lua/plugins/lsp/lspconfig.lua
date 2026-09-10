@@ -103,6 +103,8 @@ return {
 			capabilities = capabilities,
 			settings = {
 				basedpyright = {
+					-- ruff handles linting and organizing imports
+					disableOrganizeImports = true,
 					analysis = {
 						autoSearchPaths = true,
 						diagnosticMode = "openFilesOnly",
@@ -110,6 +112,14 @@ return {
 					},
 				},
 			},
+		})
+
+		lspconfig("ruff", {
+			capabilities = capabilities,
+			on_attach = function(client)
+				-- hover is basedpyright's job
+				client.server_capabilities.hoverProvider = false
+			end,
 		})
 	end,
 }
